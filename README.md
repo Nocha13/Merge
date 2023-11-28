@@ -35,7 +35,7 @@ Merge
 
 다른 포트폴리오 보기
 ---
-[Project Ark](https://github.com/Nocha13/Ark.git)
+[Project Ark](https://github.com/Nocha13/Ark_2DPortfolio.git)
 
 주요 활용 기술
 ---
