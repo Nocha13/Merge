@@ -9,8 +9,9 @@ using TMPro;
 //moveType { curTurn, minTurn }        //현재 이동수, 최소 이동수
 //timeType { curTime, clearMinTime }   //현재 플레이 시간, 최소 클리어 시간
 //countDType
+//LevelBar
 
-public enum Type {none, expLevelType , scoreType, turnType, comboType, timeType, countDType, imageType }
+public enum Type {none, expLevelType , scoreType, turnType, comboType, timeType, countDType, levelBar }
 
 public class InGameUI : MonoBehaviour
 {
@@ -19,10 +20,12 @@ public class InGameUI : MonoBehaviour
 
     [Header("UI")]
     TextMeshProUGUI text;
+    Slider slider;
 
     void Awake()
     {
         text = GetComponent<TextMeshProUGUI>();
+        slider = GetComponent<Slider>();
     }
 
     void LateUpdate()
@@ -139,7 +142,14 @@ public class InGameUI : MonoBehaviour
                     text.enabled = false;
                 }
                 break;
-                #endregion
+            #endregion
+
+            #region
+            case Type.levelBar:
+                int maxLevel = GameManager.maxLevel;
+                slider.value = maxLevel;
+                break;
+            #endregion
         }
         #region //Time
         string GetRealTime(float reTime)
