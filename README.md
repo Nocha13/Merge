@@ -23,7 +23,7 @@ Merge
 
 포트폴리오 영상
 ---
-[유튜브 영상 링크](링크예정)
+[유튜브 영상 링크](https://www.youtube.com/watch?v=tK2KazY8tvI)
 
 
 빌드 파일
