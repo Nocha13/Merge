@@ -71,5 +71,40 @@ public void 함수 이름()
     }
 }
 ```
+</details>
 
+---
+* #02)([스크립트](https://github.com/Nocha13/Merge_2DPortfolio/blob/main/Merge/Assets/02.Code/InGame/GameManager.cs#L67)) [오브젝트 풀링 생성]
+
+<details>
+<summary>예시 코드</summary>
+  
+```csharp
+ // ORDER : #02) 오브젝트 풀링 생성
+    void NextMerge()
+    {
+        if (isOver)
+            return;
+
+        //생성시 조건 정보
+        lastMerge = PoolMgr.poolInst.GetMerge();
+        lastMerge.Inst = this;
+        lastMerge.level = Random.Range(0, maxLevel);
+        lastMerge.gameObject.SetActive(true);
+        AudioMgr.Inst.PlaySfx(AudioMgr.SFX.Next);
+        isStart = true;
+        StartCoroutine(WaitNext());
+    }
+
+    IEnumerator WaitNext()
+    {
+        while (lastMerge != null)
+        {
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(0.5f); //0.5초마다 생성
+        NextMerge();
+    }
+```
 </details>
