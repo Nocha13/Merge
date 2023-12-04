@@ -108,3 +108,46 @@ public void 함수 이름()
     }
 ```
 </details>
+
+---
+* #03)([스크립트](https://github.com/Nocha13/Merge_2DPortfolio/blob/main/Merge/Assets/02.Code/InGame/LInes.cs#L61)) [경계선 이벤트]
+
+<details>
+<summary>예시 코드</summary>
+  
+```csharp
+ void Update()
+    {
+        if(warTouch == true)
+        {
+            if (Physics2D.OverlapBox(warPos, warSize, 0, mergeMask) != null)
+            {    
+                GameObject.Find("Walls").transform.Find("Color").gameObject.SetActive(true); //배경색 변경
+                
+                timer = 0.02f;
+            }
+        }
+
+        if(0.0f < timer)
+        {
+            timer -= Time.deltaTime;
+
+            if(timer <= 0.0f)
+            {
+                GameObject.Find("Walls").transform.Find("Color").gameObject.SetActive(false); //배경색 변경(원래대로)         
+            }
+        }
+
+        if (deadTouch == true)
+        {
+            if (Physics2D.OverlapBox(deadPos, deadSize, 0, mergeMask) != nul초
+
+                if (countDown <= 0.0f)
+                {
+                    GameManager.Inst.GameOver(); //게임오버
+                }
+            }
+        }
+    }
+```
+</details>
