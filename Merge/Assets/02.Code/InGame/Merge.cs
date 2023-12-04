@@ -27,7 +27,7 @@ public class Merge : MonoBehaviour
         isDrag = true;
     }
 
-    void OnEnable()
+    void OnEnable()    //최대 레벨 상황 별 생성 오브젝트 레벨 
     {
         #region 최대레벨 0이상 2이하
         if (GameManager.maxLevel <= 2) //2이하 = 레벨 0만 생성
@@ -63,7 +63,7 @@ public class Merge : MonoBehaviour
         anim.SetInteger("Level", level);
     }
 
-    void OnDisable()
+    void OnDisable()    //오브젝트 재사용
     {
         //Merge 속성 초기화
         level = 0;
