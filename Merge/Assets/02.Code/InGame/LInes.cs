@@ -57,7 +57,8 @@ public class LInes : MonoBehaviour
 
         mergeMask = 1 << LayerMask.NameToLayer("Touch");
     }
-    
+
+    // ORDER : #03) 경계선 이벤트
     void Update()
     {
         if(warTouch == true)
