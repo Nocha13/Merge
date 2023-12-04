@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class BookAchieveMgr : MonoBehaviour
 {
-    public GameObject[] lockMerge;      //Àá±İ
-    public GameObject[] unlockMerge;    //ÇØ±İ
+    public GameObject[] lockMerge;      //ì ê¸ˆ
+    public GameObject[] unlockMerge;    //í•´ê¸ˆ
     //public GameObject uiNotification;
     WaitForSecondsRealtime wait;
 
@@ -21,7 +21,7 @@ public class BookAchieveMgr : MonoBehaviour
             Init();
     }
 
-    void Init() //ÃÊ±âÈ­
+    void Init() //ì´ˆê¸°í™”
     {
         PlayerPrefs.SetInt("MergeData", 1);
 
@@ -49,7 +49,7 @@ public class BookAchieveMgr : MonoBehaviour
 
     private void LateUpdate()
     {
-        foreach(Achieve achieve in achieves) //¸ğµç ¾÷Àû È®ÀÎ
+        foreach(Achieve achieve in achieves) //ëª¨ë“  ì—…ì  í™•ì¸
         {
             AchiveCheck(achieve);
         }
@@ -90,30 +90,9 @@ public class BookAchieveMgr : MonoBehaviour
                 break;
         }
 
-        if (isAchieve && PlayerPrefs.GetInt(achieve.ToString()) == 0)    //Ã³À½ ¾÷Àû ´Ş¼º½Ã
+        if (isAchieve && PlayerPrefs.GetInt(achieve.ToString()) == 0)    //ì²˜ìŒ ì—…ì  ë‹¬ì„±ì‹œ
         {
-            PlayerPrefs.SetInt(achieve.ToString(), 1);  //¾÷Àû ´Ş¼º½Ã
-            #region
-            //for (int idx = 0; idx < uiNotification.transform.childCount; idx++)
-            //{
-            //    bool isActive = idx == (int)achieve;    //¾Ë¸² Ã¢ ÀÚ½Ä ¿ÀºêÁ§Æ® ¼øÈ¸, ¼ø¹ø ¸ÂÀ¸¸é È°¼ºÈ­
-            //    uiNotification.transform.GetChild(idx).gameObject.SetActive(isActive);
-            //}
-
-            //StartCoroutine(NotifiRoutine());
-            #endregion
+            PlayerPrefs.SetInt(achieve.ToString(), 1);  //ì—…ì  ë‹¬ì„±ì‹œ        
         }
     }
-    #region
-    //IEnumerator NotifiRoutine()
-    //{
-    //    uiNotification.SetActive(true);
-
-    //    //AudioMgr.Inst.PlaySfx(AudioMgr.SFX.LevelUp);
-
-    //    yield return wait;
-
-    //    uiNotification.SetActive(false);
-    //}
-    #endregion
 }
