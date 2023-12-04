@@ -60,23 +60,7 @@ public class LInes : MonoBehaviour
 
     void Update()
     {
-        if(warTouch == true)
-        {
-            if (Physics2D.OverlapBox(warPos, warSize, 0, mergeMask) != null)
-            {    
-                GameObject.Find("Walls").transform.Find("Color").gameObject.SetActive(true);
-                
-                timer = 0.02f;
-            }
-        }
-
-        if(0.0f < timer)
-        {
-            timer -= Time.deltaTime;
-
-            if(timer <= 0.0f)
-            {
-                GameObject.Find("Walls").transform.Find("Color").gameObject.SetActive(false);               
+        if(warTouch == t로)               
             }
         }
 
@@ -86,9 +70,9 @@ public class LInes : MonoBehaviour
             {
                 countDown -= Time.deltaTime;
 
-                if (countDown <= 0.0f)
+                if (countDown <= 0.0f)    //카운트 10초
                 {
-                    GameManager.Inst.GameOver();
+                    GameManager.Inst.GameOver();    //게임 오버
                 }
             }
         }
