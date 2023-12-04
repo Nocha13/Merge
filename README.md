@@ -155,3 +155,8 @@ public void 함수 이름()
 ---
 * #04)([스크립트](https://github.com/Nocha13/Merge_2DPortfolio/blob/main/Merge/Assets/02.Code/Don/AudioMgr.cs)) [게임 오디오 구현]
 
+---
+* #05)([스크립트](https://github.com/Nocha13/Merge_2DPortfolio/blob/main/Merge/Assets/02.Code/Don/BookAchieveMgr.cs)) [미션, 도감 구현]
+
+---
+* #06)([스크립트](https://github.com/Nocha13/Merge_2DPortfolio/blob/main/Merge/Assets/02.Code/InGame/InGameUI.cs)) [게임 GUI 구현]
