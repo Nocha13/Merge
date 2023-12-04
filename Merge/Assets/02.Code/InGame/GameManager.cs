@@ -19,9 +19,9 @@ public class GameManager : MonoBehaviour
     
     [Header("Game Datas")]
     public float gameTime; // = curTime
-    public static int curScore = 0; //ÇöÀç Á¡¼ö
-    public static int curCombo = 0; //ÇöÀç ÄŞº¸
-    public static int curTurn = 0;  //ÇöÀç ÀÌµ¿¼ö
+    public static int curScore = 0; //í˜„ì¬ ì ìˆ˜
+    public static int curCombo = 0; //í˜„ì¬ ì½¤ë³´
+    public static int curTurn = 0;  //í˜„ì¬ ì´ë™ìˆ˜
     public static int maxLevel = 0; //MergeLv
     public static bool isTurn;
 
@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        curScore = 0;       //ÃÊ±âÈ­
+        curScore = 0;       //ì´ˆê¸°í™”
         curTurn = 0;
         curCombo = 0;
         maxLevel = 0;
@@ -54,21 +54,23 @@ public class GameManager : MonoBehaviour
         if(isStart == true)
             gameTime += Time.deltaTime; 
 
-        //µğ¹ö±×¿ë
+        //ë””ë²„ê·¸ìš©
         //if (Input.GetKeyDown(KeyCode.Space))
         //    GameOver();
         //if (Input.GetKeyDown(KeyCode.C))
         //    GameClear();
 
-        if (maxLevel == 7)  //°ÔÀÓ Å¬¸®¾î Á¶°Ç
+        if (maxLevel == 7)  //ê²Œì„ í´ë¦¬ì–´ ì¡°ê±´
             GameClear();
     }
 
+    // ORDER : #02) ì˜¤ë¸Œì íŠ¸ í’€ë§ ìƒì„±
     void NextMerge()
     {
         if (isOver)
             return;
 
+        //ìƒì„±ì‹œ ì¡°ê±´ ì •ë³´
         lastMerge = PoolMgr.poolInst.GetMerge();
         lastMerge.Inst = this;
         lastMerge.level = Random.Range(0, maxLevel);
@@ -85,7 +87,7 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.5f); //0.5ì´ˆë§ˆë‹¤ ìƒì„±
         NextMerge();
     }
 
@@ -117,7 +119,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator GameOverRoutine()
     {
-        //È°¼ºÈ­ µÇÀÖ´Â ¸ğµç ¿ÀºêÁ§Æ® °¡Á®¿À±â(¸ñ·Ï)
+        //í™œì„±í™” ë˜ìˆëŠ” ëª¨ë“  ì˜¤ë¸Œì íŠ¸ ê°€ì ¸ì˜¤ê¸°(ëª©ë¡)
         Merge[] merges = FindObjectsOfType<Merge>();
 
         for (int idx = 0; idx < merges.Length; idx++)
@@ -125,7 +127,7 @@ public class GameManager : MonoBehaviour
             merges[idx].rigid.simulated = false;  
         }
 
-        //¸ñ·Ï¿¡ ÇÏ³ª¾¿ Á¢±Ù ¹× Áö¿ì±â
+        //ëª©ë¡ì— í•˜ë‚˜ì”© ì ‘ê·¼ ë° ì§€ìš°ê¸°(ë‚¨ì•„ìˆëŠ” ìˆ˜ ë§Œí¼ ì ìˆ˜ ë°˜ì˜)
         for (int idx = 0; idx < merges.Length; idx++)
         {
             merges[idx].Hide(Vector3.up * 1000);
@@ -137,7 +139,7 @@ public class GameManager : MonoBehaviour
         AudioMgr.Inst.PlayBgm(false);
 
         isOver = true;
-        if(isOver == true)
+        if(isOver == true)    //í”Œë ˆì´ì–´ ë ˆë²¨ ê²½í—˜ì¹˜
             GlobalGameData.GetExp();
         isTurn = true;
 
@@ -159,7 +161,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator GameClearRoutine()
     {
-        //È°¼ºÈ­ µÇÀÖ´Â ¸ğµç ¿ÀºêÁ§Æ® °¡Á®¿À±â(¸ñ·Ï)
+        //í™œì„±í™” ë˜ìˆëŠ” ëª¨ë“  ì˜¤ë¸Œì íŠ¸ ê°€ì ¸ì˜¤ê¸°(ëª©ë¡)
         Merge[] merges = FindObjectsOfType<Merge>();
 
         for (int idx = 0; idx < merges.Length; idx++)
@@ -167,7 +169,7 @@ public class GameManager : MonoBehaviour
             merges[idx].rigid.simulated = false;
         }
 
-        //¸ñ·Ï¿¡ ÇÏ³ª¾¿ Á¢±Ù ¹× Áö¿ì±â
+        //ëª©ë¡ì— í•˜ë‚˜ì”© ì ‘ê·¼ ë° ì§€ìš°ê¸°(ë‚¨ì•„ìˆëŠ” ìˆ˜ ë§Œí¼ ì ìˆ˜ ë°˜ì˜)
         for (int idx = 0; idx < merges.Length; idx++)
         {
             merges[idx].Hide(Vector3.up * 1000);
@@ -179,7 +181,7 @@ public class GameManager : MonoBehaviour
         AudioMgr.Inst.PlayBgm(false);
         
         isClear = true;
-        if (isClear == true)
+        if (isClear == true)    //í”Œë ˆì´ì–´ ë ˆë²¨ ê²½í—˜ì¹˜
             GlobalGameData.GetExp();
         isTurn = true;
 
@@ -188,10 +190,10 @@ public class GameManager : MonoBehaviour
         AudioMgr.Inst.PlaySfx(AudioMgr.SFX.GameOver);
         GameResult.Inst.GameClear();
 
-        #region //ÃÖ¼Ò ÀÌµ¿¼ö
+        #region //ìµœì†Œ ì´ë™ìˆ˜
         int a_MinCount = curTurn;
         int a_OldCount = PlayerPrefs.GetInt("MinTurn", 0);
-        if (0 < a_OldCount) //µÎ¹øÂ° ÀÌ»ó ÇÃ·¹ÀÌ¶ó´Â ÀÇ¹Ì(°ÔÀÓÀ» ÇÑ ÀûÀÌ ÀÖÀ¸¸é)
+        if (0 < a_OldCount) //ë‘ë²ˆì§¸ ì´ìƒ í”Œë ˆì´ë¼ëŠ” ì˜ë¯¸(ê²Œì„ì„ í•œ ì ì´ ìˆìœ¼ë©´)
         {
             if (a_OldCount < a_MinCount)
             {
@@ -202,7 +204,7 @@ public class GameManager : MonoBehaviour
         GlobalGameData.minTurn = a_MinCount;
         #endregion
 
-        #region //ÃÖ¼Ò ½Ã°£
+        #region //ìµœì†Œ ì‹œê°„
         float a_MinTime = gameTime;
         float a_OldTime = PlayerPrefs.GetFloat("MinTime", 0);
         if (0 < a_OldTime)
@@ -216,7 +218,7 @@ public class GameManager : MonoBehaviour
         GlobalGameData.minTime = a_MinTime;
         #endregion
 
-        #region //ÄŞº¸
+        #region //ì½¤ë³´
         if(curCombo > GlobalGameData.bestCombo)
         PlayerPrefs.SetInt("BestCombo", curCombo);
         #endregion
