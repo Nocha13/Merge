@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-//userInfoType { userExp, userLevel }  //À¯Àú °æÇèÄ¡, À¯Àú ·¹º§
-//scoreType { curScore, bestScore }    //ÇöÀç Á¡¼ö, ÃÖ°í Á¡¼ö
-//moveType { curTurn, minTurn }        //ÇöÀç ÀÌµ¿¼ö, ÃÖ¼Ò ÀÌµ¿¼ö
-//timeType { curTime, clearMinTime }   //ÇöÀç ÇÃ·¹ÀÌ ½Ã°£, ÃÖ¼Ò Å¬¸®¾î ½Ã°£
+//userInfoType { userExp, userLevel }  //ìœ ì € ê²½í—˜ì¹˜, ìœ ì € ë ˆë²¨
+//scoreType { curScore, bestScore }    //í˜„ì¬ ì ìˆ˜, ìµœê³  ì ìˆ˜
+//moveType { curTurn, minTurn }        //í˜„ì¬ ì´ë™ìˆ˜, ìµœì†Œ ì´ë™ìˆ˜
+//timeType { curTime, clearMinTime }   //í˜„ì¬ í”Œë ˆì´ ì‹œê°„, ìµœì†Œ í´ë¦¬ì–´ ì‹œê°„
 //countDType
 //LevelBar
 
@@ -16,7 +16,7 @@ public enum Type {none, expLevelType , scoreType, turnType, comboType, timeType,
 public class InGameUI : MonoBehaviour
 {
     public Type type = Type.none;
-    public int typeNumber;      //¾²ÀÓ ±¸ºĞ¿ë
+    public int typeNumber;      //ì“°ì„ êµ¬ë¶„ìš©
 
     [Header("UI")]
     TextMeshProUGUI text;
@@ -32,13 +32,13 @@ public class InGameUI : MonoBehaviour
     {
         switch (type)
         {
-            #region //°æÇèÄ¡, ·¹º§
+            #region //ê²½í—˜ì¹˜, ë ˆë²¨
             case Type.expLevelType:
-                if (typeNumber == 0)         //À¯Àú °æÇèÄ¡
+                if (typeNumber == 0)         //ìœ ì € ê²½í—˜ì¹˜
                 {
                     
                 }
-                else if (typeNumber == 1)    //À¯Àú ·¹º§
+                else if (typeNumber == 1)    //ìœ ì € ë ˆë²¨
                 {
                     text.text = GlobalGameData.userLevel.ToString();
                     PlayerPrefs.SetInt("UserLevel", GlobalGameData.userLevel);
@@ -51,13 +51,13 @@ public class InGameUI : MonoBehaviour
                 break;
             #endregion
 
-            #region Á¡¼ö °ü·Ã
+            #region ì ìˆ˜ ê´€ë ¨
             case Type.scoreType:
-                if (typeNumber == 0)        //ÇöÀç Á¡¼ö
+                if (typeNumber == 0)        //í˜„ì¬ ì ìˆ˜
                 {
                     text.text = GameManager.curScore.ToString();
                 }
-                else if (typeNumber == 1)   //ÃÖ°í Á¡¼ö
+                else if (typeNumber == 1)   //ìµœê³  ì ìˆ˜
                 {
                     text.text = GlobalGameData.bestScore.ToString();
                     PlayerPrefs.SetInt("BestScore", GlobalGameData.bestScore);
@@ -65,31 +65,31 @@ public class InGameUI : MonoBehaviour
                 break;
             #endregion
 
-            #region ÄŞº¸¼ö °ü·Ã
+            #region ì½¤ë³´ìˆ˜ ê´€ë ¨
             case Type.comboType:
-                if (typeNumber == 0)        //ÇöÀç ÄŞº¸¼ö
+                if (typeNumber == 0)        //í˜„ì¬ ì½¤ë³´ìˆ˜
                 {
                     text.text = GameManager.curCombo.ToString();
                 }
-                else if (typeNumber == 1)   //ÃÖ´ë ÄŞº¸¼ö
+                else if (typeNumber == 1)   //ìµœëŒ€ ì½¤ë³´ìˆ˜
                 {
                     text.text = GlobalGameData.bestCombo.ToString();
                     PlayerPrefs.SetInt("BestCombo", GlobalGameData.bestCombo);
                 }
-                //else if(typeNumber == 2)    //Áõ°¡ ÄŞº¸¼ö
+                //else if(typeNumber == 2)    //ì¦ê°€ ì½¤ë³´ìˆ˜
                 //{
 
                 //}
                 break;
             #endregion
 
-            #region ÀÌµ¿¼ö °ü·Ã
+            #region ì´ë™ìˆ˜ ê´€ë ¨
             case Type.turnType:
-                if (typeNumber == 0)        //ÇöÀç ÀÌµ¿¼ö
+                if (typeNumber == 0)        //í˜„ì¬ ì´ë™ìˆ˜
                 {
                     text.text = GameManager.curTurn.ToString();
                 }
-                else if (typeNumber == 1)   //ÃÖ¼Ò ÀÌµ¿¼ö
+                else if (typeNumber == 1)   //ìµœì†Œ ì´ë™ìˆ˜
                 {
                     text.text = GlobalGameData.minTurn.ToString();
                     PlayerPrefs.SetInt("MinTurn", GlobalGameData.minTurn);
@@ -97,32 +97,13 @@ public class InGameUI : MonoBehaviour
                 break;
             #endregion
 
-            #region ½Ã°£ °ü·Ã
+            #region ì‹œê°„ ê´€ë ¨
             case Type.timeType:
-                if (typeNumber == 0)        //ÇöÀç ÇÃ·¹ÀÌ ½Ã°£
+                if (typeNumber == 0)        //í˜„ì¬ í”Œë ˆì´ ì‹œê°„
                 {
                     text.text = GetRealTime(GameManager.Inst.gameTime);
-                    #region //Old Code
-                    //float reTime = GameManager.Inst.gameTime;
-                    //float min = Mathf.Floor(reTime / 60);
-                    //float sec = Mathf.RoundToInt(reTime % 60);
-                    //string minS = "";
-                    //string secS = "";
-
-                    //if (min < 10)
-                    //    minS = "0" + min.ToString();
-                    //else
-                    //    minS = min.ToString();
-
-                    //if (sec < 10)
-                    //    secS = "0" + Mathf.RoundToInt(sec).ToString();
-                    //else
-                    //    secS = Mathf.RoundToInt(sec).ToString();
-
-                    //text.text = string.Format("{0:D2} : {1:D2}", minS, secS);
-                    #endregion
                 }
-                else if (typeNumber == 1)   //ÃÖ¼Ò Å¬¸®¾î ½Ã°£
+                else if (typeNumber == 1)   //ìµœì†Œ í´ë¦¬ì–´ ì‹œê°„
                 {
                     text.text = GetRecordTime(GlobalGameData.minTime);
                     PlayerPrefs.SetFloat("MinTime", GlobalGameData.minTime);
@@ -130,7 +111,7 @@ public class InGameUI : MonoBehaviour
                 break;
             #endregion
 
-            #region //Ä«¿îÆ®´Ù¿î
+            #region //ì¹´ìš´íŠ¸ë‹¤ìš´
             case Type.countDType:
                 if (LInes.Inst.deadTouch == true)
                 {
