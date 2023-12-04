@@ -39,14 +39,36 @@ Merge
 
 주요 활용 기술
 ---
-* #01)([스크립트](기재예정)) [구현 설명 기재]
+* #01)([스크립트](https://github.com/Nocha13/Merge_2DPortfolio/blob/main/Merge/Assets/02.Code/InGame/Merge.cs#L123)) [오브젝트 기본 로직(합치기)]
 <details>
 <summary>예시 코드</summary>
   
 ```csharp
 public void 함수 이름()
 {
-    
+    void OnCollisionStay2D(Collision2D coll)
+    {
+        if(coll.gameObject.tag == "Merge")
+        {
+            Merge other = coll.gameObject.GetComponent<Merge>();
+
+            if(level == other.level && !isMerge && !other.isMerge && level < 7)
+            {//Start Merge
+                float myX = transform.position.x;
+                float myY = transform.position.y;
+                float otherX = other.transform.position.x;
+                float otherY = other.transform.position.y;
+
+                //아래 있을 때
+                //동일 높일 때, 오른쪽, 왼쪽에 있을 때
+                if(myY < otherY || (myY == otherY && myX > otherX && myX < otherX))
+                {//상대방 숨기기
+                    other.Hide(transform.position);
+                    LevelUp();
+                }
+            }
+        }
+    }
 }
 ```
 
