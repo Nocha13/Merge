@@ -11,7 +11,7 @@ public class LInes : MonoBehaviour
 
     public lineType type = lineType.none;
 
-    public SpriteRenderer warningRen = null;
+    public SpriteRenderer warningRen = null;    
     Vector2 warPos = Vector2.zero;
     Vector2 warSize = Vector2.zero;
     public bool warTouch;
@@ -36,7 +36,7 @@ public class LInes : MonoBehaviour
     {
         switch (type)
         {
-            case lineType.Warning:
+            case lineType.Warning:    //경고 알림
                 if (warningRen != null)
                 {
                     warPos = warningRen.transform.position;
@@ -45,7 +45,7 @@ public class LInes : MonoBehaviour
                 }
                 break;
 
-            case lineType.Dead:
+            case lineType.Dead:    //게임 오버 알림
                 if (deadRen != null)
                 {
                     deadPos = deadRen.transform.position;
@@ -96,19 +96,19 @@ public class LInes : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D coll)
     {
-        if(coll.tag == "Merge")
+        if(coll.tag == "Merge")    //"Merge" 태그
         {
             switch (type)
             {
                 case lineType.Warning:
                     warLineTimer += Time.deltaTime;
-                    if (warLineTimer > 2)
+                    if (warLineTimer > 2)    //2초 이상 닿으면 경고 알림 활성
                         warTouch = true;
                     break;
 
                 case lineType.Dead:
                     deadLineTimer += Time.deltaTime;
-                    if (deadLineTimer > 2)
+                    if (deadLineTimer > 2)    //2초 이상 닿으면 오버 이벤트 활성성
                         deadTouch = true;
                     break;
             }   
@@ -122,16 +122,18 @@ public class LInes : MonoBehaviour
             switch(type)
             {
                 case lineType.Warning:
-                    if (Physics2D.OverlapBox(warPos, warSize, 0, mergeMask) == null)
+                    if (Physics2D.OverlapBox(warPos, warSize, 0, mergeMask) == null)    //모든 오브제트 없을 시
                     {
+                        //경고 초기화
                         warLineTimer = 0;
                         warTouch = false;
                     }
                     break;
 
                 case lineType.Dead:
-                    if(Physics2D.OverlapBox(deadPos, deadSize, 0, mergeMask) == null)
+                    if(Physics2D.OverlapBox(deadPos, deadSize, 0, mergeMask) == null)    //모든 오브제트 없을 시
                     {
+                        //오버 초기화
                         deadLineTimer = 0;
                         countDown = 10;
                         deadTouch = false;
