@@ -29,34 +29,34 @@ public class Merge : MonoBehaviour
 
     void OnEnable()
     {
-        #region ÃÖ´ë·¹º§ 0ÀÌ»ó 2ÀÌÇÏ
-        if (GameManager.maxLevel <= 2) //2ÀÌÇÏ = ·¹º§ 0¸¸ »ı¼º
+        #region ìµœëŒ€ë ˆë²¨ 0ì´ìƒ 2ì´í•˜
+        if (GameManager.maxLevel <= 2) //2ì´í•˜ = ë ˆë²¨ 0ë§Œ ìƒì„±
         {
             level = 0;
         }
         #endregion
-        #region ÃÖ´ë·¹º§ 3ÀÌ»ó 5¹Ì¸¸
-        else if (GameManager.maxLevel >= 3 && GameManager.maxLevel < 5)        //ÃÖ´ë·¹º§ÀÌ 3ÀÌ»ó, 5¹Ì¸¸ÀÌ¸é
+        #region ìµœëŒ€ë ˆë²¨ 3ì´ìƒ 5ë¯¸ë§Œ
+        else if (GameManager.maxLevel >= 3 && GameManager.maxLevel < 5)        //ìµœëŒ€ë ˆë²¨ì´ 3ì´ìƒ, 5ë¯¸ë§Œì´ë©´
         {
-            int ran = Random.Range(0, 4);   //0 ~ 3 ·£´ı
+            int ran = Random.Range(0, 4);   //0 ~ 3 ëœë¤
 
-            if (ran >= 2)                   //0 ~ 2ÀÌ¸é
-                level = Random.Range(0, 3); //·¹º§ = 0 ~ 2
+            if (ran >= 2)                   //0 ~ 2ì´ë©´
+                level = Random.Range(0, 3); //ë ˆë²¨ = 0 ~ 2
 
-            else if (ran == 3)              //3ÀÌ¸é
-                level = Random.Range(2, 4); //·¹º§ = 2 ~ 3
+            else if (ran == 3)              //3ì´ë©´
+                level = Random.Range(2, 4); //ë ˆë²¨ = 2 ~ 3
         }
         #endregion
-        #region ÃÖ´ë·¹º§ 5ÀÌ»ó
-        else if (GameManager.maxLevel >= 5) //ÃÖ´ë·¹º§ 5ÀÌ»ó
+        #region ìµœëŒ€ë ˆë²¨ 5ì´ìƒ
+        else if (GameManager.maxLevel >= 5) //ìµœëŒ€ë ˆë²¨ 5ì´ìƒ
         {
-                int ran1 = Random.Range(0, 4); //0 ~ 3 ·£´ı
+                int ran1 = Random.Range(0, 4); //0 ~ 3 ëœë¤
 
-            if (ran1 > 3)                  //3¹Ì¸¸ÀÌ¸é
-                level = Random.Range(2, 5); //·¹º§ = 2 ~ 4
+            if (ran1 > 3)                  //3ë¯¸ë§Œì´ë©´
+                level = Random.Range(2, 5); //ë ˆë²¨ = 2 ~ 4
 
-            else if (ran1 == 3)             //3ÀÌ¸é
-                level = Random.Range(3, 6); //·¹º§ = 3 ~ 5 
+            else if (ran1 == 3)             //3ì´ë©´
+                level = Random.Range(3, 6); //ë ˆë²¨ = 3 ~ 5 
         }
         #endregion
 
@@ -65,18 +65,18 @@ public class Merge : MonoBehaviour
 
     void OnDisable()
     {
-        //Merge ¼Ó¼º ÃÊ±âÈ­
+        //Merge ì†ì„± ì´ˆê¸°í™”
         level = 0;
         isDrag = true;
         isMerge = false;
         isAttach = false;
 
-        //Merge Æ®·£½ºÆû ÃÊ±âÈ­
+        //Merge íŠ¸ëœìŠ¤í¼ ì´ˆê¸°í™”
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
         transform.localScale = Vector3.zero;
 
-        //Merge ¹°¸® ÃÊ±âÈ­
+        //Merge ë¬¼ë¦¬ ì´ˆê¸°í™”
         rigid.simulated = false;
         rigid.velocity = Vector2.zero;
         rigid.angularVelocity = 0;
@@ -95,13 +95,7 @@ public class Merge : MonoBehaviour
             transform.position = Move.Inst.transform.position + new Vector3(0, -1, 0);
         }
     }
-    #region
-    //public void Drag()
-    //{
-    //    isDrag = true;
-    //}
-    #endregion
-
+    
     public void Drop()
     {
         isDrag = false;
@@ -119,13 +113,14 @@ public class Merge : MonoBehaviour
             yield break;
         
         isAttach = true;
-        AudioMgr.Inst.PlaySfx(AudioMgr.SFX.Attach);
+        AudioMgr.Inst.PlaySfx(AudioMgr.SFX.Attach);    //ì–´ë”˜ê°€ ë¶€ë”ªíˆë©´ ì˜¤ë””ì˜¤ í™œì„±
 
         yield return new WaitForSeconds(0.2f);
 
         isAttach = false;
     }
 
+    // ORDER : #01) ì˜¤ë¸Œì íŠ¸ ê¸°ë³¸ ë¡œì§(í•©ì¹˜ê¸°)
     void OnCollisionStay2D(Collision2D coll)
     {
         if(coll.gameObject.tag == "Merge")
@@ -139,10 +134,10 @@ public class Merge : MonoBehaviour
                 float otherX = other.transform.position.x;
                 float otherY = other.transform.position.y;
 
-                //³»°¡ ¾Æ·¡ ÀÖÀ» ¶§
-                //µ¿ÀÏ ³ôÀÏÀÏ ¶§, ³»°¡ ¿À¸¥ÂÊ, ¿ŞÂÊ¿¡ ÀÖÀ» ‹š
+                //ì•„ë˜ ìˆì„ ë•Œ
+                //ë™ì¼ ë†’ì¼ ë•Œ, ì˜¤ë¥¸ìª½, ì™¼ìª½ì— ìˆì„ ë•Œ
                 if(myY < otherY || (myY == otherY && myX > otherX && myX < otherX))
-                {//»ó´ë¹æ ¼û±â±â
+                {//ìƒëŒ€ë°© ìˆ¨ê¸°ê¸°
                     other.Hide(transform.position);
                     LevelUp();
                 }
@@ -150,7 +145,7 @@ public class Merge : MonoBehaviour
         }
     }
 
-    public void Hide(Vector3 targetPos)
+    public void Hide(Vector3 targetPos)    //í•©ì³ì§€ë©´ì„œ ë¹„í™œì„±í™”
     {
         isMerge = true;
 
@@ -166,7 +161,7 @@ public class Merge : MonoBehaviour
             StartCoroutine(HideRoutine(targetPos));
     }
 
-    IEnumerator HideRoutine(Vector3 targetPos)
+    IEnumerator HideRoutine(Vector3 targetPos)    //ëª¨ë“  ì˜¤ë¸Œì íŠ¸ ìˆœí™˜
     {
         int count = 0;
 
@@ -193,7 +188,7 @@ public class Merge : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    void LevelUp()
+    void LevelUp()    
     {
         isMerge = true;
         rigid.velocity = Vector2.zero;
@@ -202,25 +197,25 @@ public class Merge : MonoBehaviour
         StartCoroutine(LevelUpRoutine());
     }
 
-    IEnumerator LevelUpRoutine()
+    IEnumerator LevelUpRoutine()    //ë ˆë²¨ì—…(ê°™ì€ ì˜¤ë¸Œì íŠ¸ í•©ì³¤ì„ ë•Œ)
     {
         yield return new WaitForSeconds(0.2f);
 
-        anim.SetInteger("Level", level + 1);
+        anim.SetInteger("Level", level + 1);    //ì˜¤ë¸Œì íŠ¸ ë ˆë²¨
 
-        EffectPlay();
+        EffectPlay();    
         AudioMgr.Inst.PlaySfx(AudioMgr.SFX.LevelUp);
 
         yield return new WaitForSeconds(0.3f);
 
         level++;
 
-        GameManager.maxLevel = Mathf.Max(level, GameManager.maxLevel);
+        GameManager.maxLevel = Mathf.Max(level, GameManager.maxLevel);    //ì˜¤ë¸Œì íŠ¸ ìµœëŒ€ ë ˆë²¨
 
         isMerge = false;
     }
 
-    void EffectPlay()
+    void EffectPlay()    //í•©ì¹ ë•Œ ì´í™íŠ¸ ìƒì„±
     {
         particle.transform.position = transform.position;
         particle.transform.localScale = transform.localScale;
